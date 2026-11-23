@@ -4,6 +4,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
+import NavBar from "../components/navBar";
+
 export default function HomePage() {
 
   const [products, setProducts] = useState([]);
@@ -44,56 +46,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-[#100606] text-white">
 
       {/* ================= NAVBAR ================= */}
-
-      <nav className="w-full bg-black/60 backdrop-blur-xl border-b border-red-500/20 sticky top-0 z-50">
-
-        <div className="max-w-[1400px] mx-auto px-6 py-4 flex justify-between items-center">
-
-          {/* Logo */}
-          <Link to="/" className="text-3xl font-black tracking-widest">
-            B<span className="text-red-600">.</span>STORE
-          </Link>
-
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center gap-10 text-sm text-gray-300">
-
-            <a href="#" className="hover:text-red-500 transition">
-              Home
-            </a>
-
-            <a href="#products" className="hover:text-red-500 transition">
-              Products
-            </a>
-
-            <a href="#about" className="hover:text-red-500 transition">
-              About Us
-            </a>
-
-          </div>
-
-          {/* Login / Register */}
-          <div className="flex items-center gap-3">
-
-            <Link
-              to="/login"
-              className="px-5 py-2 text-sm text-white hover:text-red-400 transition"
-            >
-              Login
-            </Link>
-
-            <Link
-              to="/register"
-              className="px-5 py-2 bg-red-700 hover:bg-red-600 rounded-lg text-sm font-semibold shadow-[0_0_15px_rgba(220,38,38,0.3)] transition"
-            >
-              Register
-            </Link>
-
-          </div>
-
-        </div>
-      </nav>
-
-
+      <NavBar/>
       {/* ================= HERO SECTION ================= */}
 
       <section className="relative min-h-[600px] flex items-center bg-[url(/Login-bg.jpg)] bg-cover bg-center">
@@ -371,7 +324,7 @@ export default function HomePage() {
 
       {/* ================= FOOTER ================= */}
 
-      <footer className="bg-black border-t border-red-500/20 px-6 py-10">
+      <footer id="footer" className="bg-black border-t border-red-500/20 px-6 py-10">
 
         <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-5">
 
@@ -385,24 +338,24 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="flex gap-6 text-sm text-gray-400">
+          <div className="flex flex-col gap-6 text-sm text-gray-400">
 
-            <a href="#" className="hover:text-red-500 transition">
-              Home
+            <a href="" className="hover:text-red-500 transition">
+              Facebook
             </a>
 
-            <a href="#products" className="hover:text-red-500 transition">
-              Products
+            <a href="" className="hover:text-red-500 transition">
+              Instagram
             </a>
 
-            <Link to="/login" className="hover:text-red-500 transition">
-              Login
+            <Link to="" className="hover:text-red-500 transition">
+              WhatsApp
             </Link>
 
           </div>
 
           <p className="text-gray-600 text-xs">
-            © {new Date().getFullYear()} B Store. All rights reserved.
+            © {new Date().getFullYear()} ChamaraKumara. All rights reserved.
           </p>
 
         </div>

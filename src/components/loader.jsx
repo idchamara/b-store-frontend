@@ -1,7 +1,7 @@
 
 export default function Loader() {
     return (
-        <div className="w-full h-full min-h-screen bg-[url(/Login-bg.jpg)] bg-cover bg-center flex justify-center items-center relative">
+        <div className="w-full h-full min-h-screen bg-[#100606] bg-cover bg-center flex justify-center items-center relative">
 
             {/* Background Overlay */}
             <div className="absolute inset-0 bg-black/50"></div>

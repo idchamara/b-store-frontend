@@ -53,7 +53,7 @@ export default function RegisterPage() {
         user
       );
 
-      console.log("Registration successful", response.data);
+      //console.log("Registration successful", response.data);
 
       toast.success("Registration successful!");
 

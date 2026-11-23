@@ -11,6 +11,7 @@ import AdminProductsPage from "./admin/product";
 import AdminUsersPage from "./admin/user";
 import AddProductForm from "./admin/addProduct";
 import EditProductForm from "./admin/editProduct";
+import AdminOrderPage from "./admin/order";
 
 export default function AdminPage() {
 
@@ -71,7 +72,7 @@ export default function AdminPage() {
                             Administrator
                         </h3>
 
-                        <p className="text-green-400 text-xs mt-1">
+                        <p className="text-green-400 text-xs mt-1 s animate-pulse">
                             ● Online
                         </p>
                     </div>
@@ -248,7 +249,7 @@ export default function AdminPage() {
                         {/* Orders */}
                         <Route
                             path="/orders"
-                            element={<h1 className="text-white text-4xl text-center p-10">Manage Orders</h1>}
+                            element={<AdminOrderPage/>}
                         />
 
                         {/* Add Product */}

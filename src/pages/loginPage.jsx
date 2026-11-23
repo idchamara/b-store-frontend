@@ -3,6 +3,8 @@ import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
+import { useGoogleLogin } from "@react-oauth/google";
+import { GrGoogle } from "react-icons/gr";
 
 export default function LoginPage() {
 
@@ -11,6 +13,44 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  const loginWithGoogle = useGoogleLogin(
+    {
+      onSuccess : async (res) => {
+        setLoading(true)
+
+        try {
+          const response = await axios.post(
+            import.meta.env.VITE_BACKEND_URL + "/api/user/google",{
+              access_token: res.access_token
+            }
+          );
+          toast.success("Login successful!");
+          localStorage.setItem("token", response.data.token);
+
+          const user = response.data.user;
+      
+          if (user.role === "admin") {
+            navigate("/admin");
+          } else {
+            navigate("/");
+          }
+
+        } catch (err) {
+            toast.error(err.response?.data?.message || "Google Login failed");
+          
+        } finally {
+          setLoading(false);
+        }
+      }
+    },
+    {
+      onError: () => {
+        toast.error("Google Authentication failed");
+        setLoading(false);
+      }
+    }
+  );
 
   async function handleLogin(e) {
 
@@ -33,7 +73,7 @@ export default function LoginPage() {
         }
       );
 
-      console.log("Login successful", response.data);
+      //console.log("Login successful", response.data);
 
       toast.success("Login successful!");
 
@@ -76,8 +116,8 @@ export default function LoginPage() {
         </h1>
 
         <form
+          className="w-full flex flex-col items-center  mb-5"
           onSubmit={handleLogin}
-          className="w-full flex flex-col items-center"
         >
 
           {/* Email */}
@@ -106,8 +146,17 @@ export default function LoginPage() {
           >
             {loading ? "Logging In..." : "Login"}
           </button>
-
         </form>
+
+        {/* Google login */}
+        <button
+            disabled={loading}
+            className="w-full h-[50px] bg-red-700 hover:bg-red-600 disabled:bg-gray-600 rounded-xl text-white font-bold text-sm shadow-[0_0_20px_rgba(220,38,38,0.5)] hover:shadow-[0_0_30px_rgba(220,38,38,0.7)] transition-all duration-300 cursor-pointer flex justify-center items-center"
+            onClick={loginWithGoogle}
+          >
+            <GrGoogle className="mr-[10px]"/>
+            {loading ? "Logging In..." : "Login with Google"}
+        </button>
 
         {/* Register Link */}
         <p className="text-gray-300 text-xs mt-8 text-center">

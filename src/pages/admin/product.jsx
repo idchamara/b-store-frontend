@@ -60,7 +60,7 @@ export default function AdminProductsPage() {
         // loaded screen
         loaded && (
           <table className="w-full">
-            <thead className="text-gray-400 ">
+            <thead className="text-gray-300 ">
               <tr>
                 <th className="p-2">Product ID</th>
                 <th className="p-2">Product Name</th>
@@ -77,7 +77,7 @@ export default function AdminProductsPage() {
                 return (
                   <tr
                     key={indexNumber}
-                    className="w-full h-[60px] text-center text-gray-400 border-b-2 border-gray-300 cursor-pointer hover:bg-gray-600 "
+                    className="w-full h-[60px] text-center text-gray-400 border-b-1 border-gray-300 cursor-pointer hover:bg-gray-600 "
                   >
                     <td className="p-2">{prodcts.productId}</td>
                     <td className="p-2">{prodcts.productName}</td>

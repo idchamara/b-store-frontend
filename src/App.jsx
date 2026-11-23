@@ -5,26 +5,36 @@ import LoginPage from './pages/loginPage'
 import HomePage from './pages/homePage'
 import { Toaster } from 'react-hot-toast'
 import RegisterPage from './pages/registerPage'
+import ProductsPage from './pages/productPage'
+import ProductOverview from './pages/productOverview'
+import CartPage from './pages/cart'
+import ChechoutPage from './pages/checkout'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
 function App() {
 
   return (
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+      <BrowserRouter>
     
-    <BrowserRouter>
-    
-    <Toaster position='top-right' />
-    <Routes path= "/*">
-    <Route path="/" element={<HomePage/>}/>
-    <Route path="/admin/*" element={<AdminPage/>}/>
-    <Route path="/login" element={<LoginPage/>}/>
-    <Route path="/register" element={<RegisterPage/>}/>
-    <Route path = "/*" element= {<h1>404 Not Found</h1>}/>
-    </Routes>
+        <Toaster position='top-right' />
+        <Routes path= "/*">
+          <Route path="/" element={<HomePage/>}/>
+          <Route path="/products" element={<ProductsPage/>}/>
+          <Route path="/overview/:id" element={<ProductOverview/>}/>
+          <Route path="/cart" element={<CartPage/>}/>
+          <Route path="/checkout" element={<ChechoutPage/>}/>
+          <Route path="/admin/*" element={<AdminPage/>}/>
+          <Route path="/login" element={<LoginPage/>}/>
+          <Route path="/register" element={<RegisterPage/>}/>
+        <Route path="/*" element={<h1>404 Not Found</h1>}/> {/*Any other links*/}
+        </Routes>
 
-    </BrowserRouter>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
   )
 }
 
 export default App
 
-//start from 16
+//start from 18
