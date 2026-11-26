@@ -15,7 +15,7 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 
-import NavBar from "../components/navBar";
+import NavBar from "../../components/navBar";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";

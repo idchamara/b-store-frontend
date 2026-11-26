@@ -4,10 +4,10 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-import NavBar from "../components/navBar";
-import Loader from "../components/loader";
-import ImageSlider from "../components/ImageSlider";
-import { addToCart } from "../../utils/cart";
+import NavBar from "../../components/navBar";
+import Loader from "../../components/loader";
+import ImageSlider from "../../components/ImageSlider";
+import { addToCart } from "../../../utils/cart";
 
 import {
   FaArrowLeft,

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import NavBar from "../components/navBar";
-import Loader from "../components/loader";
-import ProductCard from "../components/productCard";
+import NavBar from "../../components/navBar";
+import Loader from "../../components/loader";
+import ProductCard from "../../components/productCard";
 
 export default function ProductsPage() {
     const [productList, setProductList] = useState([]);
