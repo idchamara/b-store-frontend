@@ -1,8 +1,9 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import Loader from "../../components/loader";
 import { IoCloseSharp } from "react-icons/io5";
 import toast from "react-hot-toast";
+
+import Loader from "../../components/loader";
 
 export default function AdminOrderPage(){
     const [orders, setOrders] = useState([])
@@ -118,40 +119,218 @@ export default function AdminOrderPage(){
                     </table>
                     {
                         modelDisplaying && 
-                        <div className="fixed bg-[#00000070] w-full h-full top-0 left-0 flex justify-center items-center">
-                            <div className="w-[600px] h-[600px] max-h-[600px] bg-white  relative">
-                                <button 
-                                className="w-[30px] h-[30px] rounded-full border-2 border-red-500 flex justify-center items-center cursor-pointer absolute right-[-35px] top-[-35px]"
-                                onClick={() => {setModelDisplaying(false)}}
-                                >
-                                    <IoCloseSharp className="text-xl text-red-500"/>
-                                </button>
-                                <div className="w-[full] h-[150px]">
-                                    <h1 className="text-sm font-bold p-2">Order ID: {displayinfOrder.orderId}</h1>
-                                    <h1 className="text-sm font-bold p-2">Order Date: {new Date(displayinfOrder.date).toDateString()}</h1>
-                                    <h1 className="text-sm font-bold p-2">Total: LKR {displayinfOrder.total.toFixed(2)}</h1>
-                                    <h1 className="text-sm font-bold p-2">Status: {displayinfOrder.status}</h1>
+                        <div
+                            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm
+                            flex justify-center items-center p-3 sm:p-6"
+                            onClick={() => setModelDisplaying(false)}
+                        >
+                            <div
+                                className="relative w-full max-w-2xl max-h-[90vh]
+                                bg-gradient-to-br from-[#211010] via-[#160909] to-[#0d0707]
+                                border border-red-900/40 rounded-2xl sm:rounded-3xl
+                                shadow-[0_0_50px_rgba(220,38,38,0.15)]
+                                overflow-hidden flex flex-col"
+                                onClick={(e) => e.stopPropagation()}
+                            >
+                            
+                                {/* Header */}
+                                <div className="relative p-5 sm:p-7
+                                    border-b border-red-900/30
+                                    bg-gradient-to-r from-red-950/50 to-transparent">
                                     
+                                    <button
+                                        onClick={() => setModelDisplaying(false)}
+                                        className="absolute top-4 right-4 w-9 h-9
+                                        flex items-center justify-center rounded-full
+                                        bg-white/5 border border-white/10
+                                        text-gray-400 hover:text-white
+                                        hover:bg-red-700 hover:border-red-500
+                                        transition-all duration-300 cursor-pointer"
+                                    >
+                                        <IoCloseSharp size={22} />
+                                    </button>
+
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <div className="w-11 h-11 rounded-xl
+                                            bg-red-600/15 border border-red-600/30
+                                            flex items-center justify-center">
+                                            <span className="text-red-500 text-xl">📦</span>
+                                        </div>
+
+                                        <div>
+                                            <h2 className="text-xl sm:text-2xl
+                                                font-black text-white tracking-wide">
+                                                Order Details
+                                            </h2>
+                                            <p className="text-xs text-gray-500 mt-1">
+                                                B.STORE Purchase Information
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-5">
+                                        <p className="text-xs text-gray-500 uppercase
+                                            tracking-widest mb-1">
+                                            Order Reference
+                                        </p>
+                                        <p className="text-sm sm:text-base font-bold
+                                            text-red-400 break-all">
+                                            {displayinfOrder.orderId}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className="w-[full] h-[450px] max-h-[450px] overflow-y-scroll">
-                                    {
-                                        displayinfOrder.billItems.map((item, indx) => {
-                                            return(
-                                                <div 
-                                                key={indx}
-                                                className="w-full h-[100px] shadow-2xl bg-white my-[5px] flex justify-between items-center"
-                                                >
-                                                    <img src={item.image} className="h-full aspect-square object-cover" />
-                                                    <div className="h-full w-[300px] max-w-[300px] overflow-hidden">
-                                                        <h1>{item.productName}</h1>
-                                                        <h1>LKR {item.price.toFixed(2)}</h1>
-                                                        <h1>Quantity: {item.quantity}</h1>
-                                                    </div>
-                                                </div>
-                                            )
-                                        })
-                                    }
+
+                                {/* Order Information */}
+                                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 sm:p-6">
+
+                                    <div className="bg-white/[0.04] border border-white/10
+                                        rounded-xl p-3">
+                                        <p className="text-[10px] sm:text-xs
+                                            text-gray-500 mb-2 uppercase tracking-wider">
+                                            Order Date
+                                        </p>
+                                        <p className="text-xs sm:text-sm font-semibold text-white">
+                                            {new Date(displayinfOrder.date).toLocaleDateString()}
+                                        </p>
+                                    </div>
+
+                                    <div className="bg-white/[0.04] border border-white/10
+                                        rounded-xl p-3">
+                                        <p className="text-[10px] sm:text-xs
+                                            text-gray-500 mb-2 uppercase tracking-wider">
+                                            Total Amount
+                                        </p>
+                                        <p className="text-xs sm:text-sm font-bold text-red-400">
+                                            LKR {Number(displayinfOrder.total).toFixed(2)}
+                                        </p>
+                                    </div>
+
+                                    <div className="bg-white/[0.04] border border-white/10
+                                        rounded-xl p-3 col-span-2 sm:col-span-2">
+                                        <p className="text-[10px] sm:text-xs
+                                            text-gray-500 mb-2 uppercase tracking-wider">
+                                            Order Status
+                                        </p>
+
+                                        <span className="inline-flex items-center gap-2
+                                            px-3 py-1 rounded-full text-xs font-bold
+                                            bg-red-500/10 border border-red-500/20
+                                            text-red-400">
+                                            <span className="w-1.5 h-1.5 rounded-full
+                                                bg-red-500" />
+                                            {displayinfOrder.status}
+                                        </span>
+                                    </div>
+
                                 </div>
+
+                                {/* Items Header */}
+                                <div className="px-5 sm:px-6 pb-3 flex items-center
+                                    justify-between border-b border-white/10">
+                                    <h3 className="text-sm sm:text-base
+                                        font-bold text-white">
+                                        Ordered Products
+                                    </h3>
+
+                                    <span className="text-xs text-gray-500">
+                                        {displayinfOrder.billItems.length} Items
+                                    </span>
+                                </div>
+
+                                {/* Product List */}
+                                <div className="flex-1 min-h-0 overflow-y-auto
+                                    px-4 sm:px-6 py-4 space-y-3
+                                    scrollbar-thin scrollbar-thumb-red-900
+                                    scrollbar-track-transparent">
+                                    
+                                    {displayinfOrder.billItems.map((item, indx) => (
+                                        <div
+                                            key={indx}
+                                            className="flex items-center gap-3 sm:gap-5
+                                            p-3 rounded-2xl
+                                            bg-white/[0.04] border border-white/[0.08]
+                                            hover:border-red-900/50
+                                            hover:bg-red-950/20 transition-all duration-300"
+                                        >
+                                        
+                                            {/* Product Image */}
+                                            <div className="w-20 h-20 sm:w-24 sm:h-24
+                                                shrink-0 overflow-hidden rounded-xl
+                                                bg-black/30 border border-white/10">
+                                                <img
+                                                    src={item.image}
+                                                    alt={item.productName}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </div>
+                                    
+                                            {/* Product Information */}
+                                            <div className="flex-1 min-w-0">
+                                                <h4 className="text-sm sm:text-base
+                                                    font-bold text-white truncate">
+                                                    {item.productName}
+                                                </h4>
+                                    
+                                                <p className="text-xs text-gray-500 mt-2">
+                                                    Unit Price
+                                                </p>
+                                    
+                                                <p className="text-sm font-semibold text-red-400">
+                                                    LKR {Number(item.price).toFixed(2)}
+                                                </p>
+                                    
+                                                <p className="text-xs text-gray-400 mt-1">
+                                                    Quantity: {item.quantity}
+                                                </p>
+                                            </div>
+                                    
+                                            {/* Item Total */}
+                                            <div className="text-right shrink-0">
+                                                <p className="text-[10px] sm:text-xs
+                                                    text-gray-500 mb-1">
+                                                    Subtotal
+                                                </p>
+                                                <p className="text-xs sm:text-sm
+                                                    font-bold text-white">
+                                                    LKR {(Number(item.price) *
+                                                        Number(item.quantity)).toFixed(2)}
+                                                </p>
+                                            </div>
+                                                    
+                                        </div>
+                                    ))}
+
+                                </div>
+                                
+                                {/* Footer */}
+                                <div className="p-5 sm:px-7 sm:py-5
+                                    border-t border-red-900/30
+                                    bg-black/20 flex items-center justify-between">
+                                    
+                                    <div>
+                                        <p className="text-xs text-gray-500">
+                                            Total Order Value
+                                        </p>
+                                        <h3 className="text-lg sm:text-2xl
+                                            font-black text-red-500 mt-1">
+                                            LKR {Number(displayinfOrder.total).toFixed(2)}
+                                        </h3>
+                                    </div>
+                                
+                                    <button
+                                        onClick={() => setModelDisplaying(false)}
+                                        className="px-5 sm:px-7 py-3 rounded-xl
+                                        bg-gradient-to-r from-red-800 to-red-600
+                                        hover:from-red-700 hover:to-red-500
+                                        text-white text-xs sm:text-sm font-bold
+                                        shadow-lg shadow-red-900/20
+                                        transition-all duration-300 cursor-pointer"
+                                    >
+                                        Close
+                                    </button>
+                                
+                                </div>
+                                
                             </div>
                         </div>
                         

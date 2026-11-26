@@ -45,7 +45,11 @@ export default function ProductCard(props){
 
                   <div className="flex items-center gap-3 mt-4">
                     <span className="text-red-500 text-xl font-bold">LKR {product.price.toFixed(2)} </span>
-                    <span className="text-gray-500 text-sm line-through">{product.price < product.labeledPrice && product.labeledPrice.toFixed(2)}</span>
+                    {
+                        product.price < product.labeledPrice && (
+                            <span className="text-gray-500 text-sm line-through">LKR {product.labeledPrice.toFixed(2)}</span>
+                        )
+                    }
                   </div>
             </div>
             

@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 import NavBar from "../components/navBar";
@@ -11,6 +11,7 @@ export default function HomePage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+
 
   useEffect(() => {
     async function fetchProducts() {
@@ -77,13 +78,12 @@ export default function HomePage() {
             </p>
 
             <div className="flex flex-wrap gap-4 mt-9">
-
-              <a
-                href="#products"
-                className="px-8 py-4 bg-red-700 hover:bg-red-600 rounded-xl font-bold shadow-[0_0_25px_rgba(220,38,38,0.4)] transition-all duration-300"
+              <Link
+              to="/products"
+              className="px-8 py-4 bg-red-700 hover:bg-red-600 rounded-xl font-bold shadow-[0_0_25px_rgba(220,38,38,0.4)] transition-all duration-300"
               >
                 Explore Products →
-              </a>
+              </Link>
 
               <Link
                 to="/register"
@@ -273,12 +273,23 @@ export default function HomePage() {
 
                   </div>
 
-                  <button
-                    disabled={product.stock <= 0}
-                    className="w-full mt-5 py-3 bg-red-800 hover:bg-red-600 disabled:bg-gray-700 disabled:text-gray-400 rounded-xl text-sm font-bold transition"
-                  >
-                    {product.stock > 0 ? "View Product →" : "Out of Stock"}
-                  </button>
+                  
+                    {product.stock > 0 ? (
+                      <Link
+                        to={`/overview/${product.productId}`}
+                        className="w-full mt-5 py-3 bg-red-800 hover:bg-red-600 text-white rounded-xl text-sm font-bold transition flex items-center justify-center"
+                      >
+                        View Product →
+                      </Link>
+                    ) : (
+                      <button
+                        disabled
+                        className="w-full mt-5 py-3 bg-gray-700 text-gray-400 rounded-xl text-sm font-bold cursor-not-allowed"
+                      >
+                        Out of Stock
+                      </button>
+                    )}
+
 
                 </div>
 
