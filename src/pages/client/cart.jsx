@@ -222,7 +222,7 @@ export default function CartPage() {
                       refreshCart();
                     }}
                     title="Remove product"
-                    className="absolute top-3 right-3 sm:static sm:self-start sm:ml-2 w-9 h-9 shrink-0 rounded-full border border-red-500/20 bg-red-500/10 text-red-400 flex items-center justify-center hover:bg-red-600 hover:text-white hover:border-red-600 transition cursor-pointer"
+                    className="absolute top-3 right-3 sm:static sm:self-start sm:ml-2 w-9 h-9 shrink-0 rounded-full border border-red-600 bg-red-600 text-white sm:border-red-500/20 sm:bg-red-500/10 sm:text-red-400 flex items-center justify-center hover:bg-red-700 hover:text-white hover:border-red-700 transition cursor-pointer"
                   >
                     <TbTrash size={18} />
                   </button>
